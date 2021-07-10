@@ -10,7 +10,7 @@ body {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 4fr;
-	background: rgb(0 0 0 / 75%);
+	background: #e64942;
 }
 
 .text-container {
@@ -26,11 +26,13 @@ body {
 
 .text-container p {
 	font-size: 40px;
-	color: aqua;
+	font-weight: 500;
+	color: rgb(0, 0, 0);
 }
 
 .text-container p span {
-	color: red;
+	color: #fff;
+	font-weight: 700;
 	font-size: 55px;
 	padding-left: 20px;
 }
@@ -38,19 +40,20 @@ body {
 .text-container button {
 	padding: 8px 30px;
 	font-size: 25px;
-	background: #f35656;
-	color: #fff;
+	background: #39ffeb;
+	color: #0a0a0a;
 	font-weight: 600;
 	border-radius: 10px;
 	outline: none;
 	border: none;
-	box-shadow: 4px 4px 5px #000;
+	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.527), -4px -4px 15px rgba(0, 0, 0, 0.527);
 	cursor: pointer;
 	transition: all 0.2s ease-in;
 }
 
 .text-container button:hover {
-	background: #ff0000;
+	color: #e6e6e6;
+	background: #00c4b0;
 }
 
 .container {
@@ -78,7 +81,7 @@ body {
 	font-size: 100px;
 	overflow: hidden;
 	text-align: center;
-	background: rgba(255, 255, 255, 0.938);
+	background: #83cff5;
 	cursor: pointer;
 }
 
