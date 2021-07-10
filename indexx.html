@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="text-container">
+			<p>Player "X" : <span id="playerX">0</span></p>
+			<button id="resetScore">Rest Score</button>
+			<p>Player "O" : <span id="playerO">0</span></p>
+		</div>
+		<div class="container">
+			<div class="table">
+				<div class="sc a-1"><input onfocus="clicked(0)" class="text" value="" type="text" /></div>
+				<div class="sc a-2"><input onfocus="clicked(1)" class="text" value="" type="text" /></div>
+				<div class="sc a-3"><input onfocus="clicked(2)" class="text" value="" type="text" /></div>
+				<div class="sc a-4"><input onfocus="clicked(3)" class="text" value="" type="text" /></div>
+				<div class="sc a-5"><input onfocus="clicked(4)" class="text" value="" type="text" /></div>
+				<div class="sc a-6"><input onfocus="clicked(5)" class="text" value="" type="text" /></div>
+				<div class="sc a-7"><input onfocus="clicked(6)" class="text" value="" type="text" /></div>
+				<div class="sc a-8"><input onfocus="clicked(7)" class="text" value="" type="text" /></div>
+				<div class="sc a-9"><input onfocus="clicked(8)" class="text" value="" type="text" /></div>
+			</div>
+		</div>
+
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script>
+			const inputFiled = document.querySelectorAll(".text");
+			let playerX = document.getElementById("playerX");
+			let playerO = document.getElementById("playerO");
+			let x = 0;
+			let o = 0;
+
+			document.getElementById("resetScore").addEventListener("click", () => {
+				location.reload();
+			});
+
+			let validation = (inputType) => {
+				if (inputType.value == "o" || inputType.value == "O" || inputType.value == "x" || inputType.value == "X") {
+					return true;
+				} else {
+					swal("😰Nop!😖", "Only X or O", "error").then((value) => {
+						inputType.value = "";
+						return false;
+					});
+				}
+			};
+
+			let reset = (win) => {
+				if (win == "x" || win == "X") {
+					x += 1;
+					console.log(x);
+					playerX.innerText = x;
+				} else {
+					o += 1;
+					playerO.innerText = o;
+				}
+				for (let i = 0; i < 9; i++) {
+					inputFiled[i].value = "";
+				}
+			};
+
+			let over = (win) => {
+				swal(`! Player ${win.toUpperCase()} Win !`, "", "success").then((value) => {
+					reset(win);
+				});
+			};
+
+			let gameOver = () => {
+				if (
+					inputFiled[0].value === inputFiled[1].value &&
+					inputFiled[0].value === inputFiled[2].value &&
+					inputFiled[0].value != ""
+				) {
+					over(inputFiled[0].value);
+				}
+				if (
+					inputFiled[3].value === inputFiled[4].value &&
+					inputFiled[3].value === inputFiled[5].value &&
+					inputFiled[3].value != ""
+				) {
+					over(inputFiled[3].value);
+				}
+				if (
+					inputFiled[6].value === inputFiled[7].value &&
+					inputFiled[6].value === inputFiled[8].value &&
+					inputFiled[6].value != ""
+				) {
+					over(inputFiled[6].value);
+				}
+				if (
+					inputFiled[0].value === inputFiled[3].value &&
+					inputFiled[0].value === inputFiled[6].value &&
+					inputFiled[0].value != ""
+				) {
+					over(inputFiled[0].value);
+				}
+				if (
+					inputFiled[1].value === inputFiled[4].value &&
+					inputFiled[1].value === inputFiled[7].value &&
+					inputFiled[1].value != ""
+				) {
+					over(inputFiled[1].value);
+				}
+				if (
+					inputFiled[2].value === inputFiled[5].value &&
+					inputFiled[2].value === inputFiled[8].value &&
+					inputFiled[2].value != ""
+				) {
+					over(inputFiled[2].value);
+				}
+				if (
+					inputFiled[0].value === inputFiled[4].value &&
+					inputFiled[0].value === inputFiled[8].value &&
+					inputFiled[0].value != ""
+				) {
+					over(inputFiled[0].value);
+				}
+				if (
+					inputFiled[2].value === inputFiled[4].value &&
+					inputFiled[2].value === inputFiled[6].value &&
+					inputFiled[2].value != ""
+				) {
+					over(inputFiled[2].value);
+				}
+			};
+
+			function clicked(e) {
+				inputFiled[e].addEventListener("keyup", () => {
+					let val = validation(inputFiled[e]);
+					if (val) {
+						gameOver();
+					}
+				});
+				inputFiled[e].addEventListener("focusout", () => {
+					let val = validation(inputFiled[e]);
+					if (val) {
+						gameOver();
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
